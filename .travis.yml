@@ -22,10 +22,11 @@ script:
 after_success:
     - docker cp build:/root/rpmbuild/RPMS/x86_64 .
     - BINARY_NAME=`ls x86_64/`
+    - TRAVIS_TAG=Release-$TRAVIS_BUILD_NUMBER
 
 deploy:
   provider: releases
-  prerelease: true
+  prerelease: false
   api_key: "$AUTH_TOKEN_BUILD"
   file:
     - x86_64/$BINARY_NAME
