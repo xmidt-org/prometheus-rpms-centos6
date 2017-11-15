@@ -2,7 +2,7 @@
 
 # Defaults
 RPM_BUILD_ROOT=/root
-SIGN=1
+NOSIGN=
 NAME=
 RELEASE=
 
@@ -30,7 +30,7 @@ while [ "$1" != "" ]; do
                             RPM_BUILD_ROOT=$1
                             ;;
 
-        --no-sign )         SIGN=0
+        --no-sign )         NOSIGN='nosign'
                             ;;
 
         --build-number )    shift
@@ -60,16 +60,31 @@ else
     echo "Building rpm for ${RELEASE}"
 fi
 
+echo "spectool -g -R ${NAME}.spec"
 spectool -g -R ${NAME}.spec
+
+echo "cp ${NAME}.initd       ${RPM_BUILD_ROOT}/rpmbuild/SOURCES/."
 cp ${NAME}.initd       ${RPM_BUILD_ROOT}/rpmbuild/SOURCES/.
+
+echo "cp ${NAME}.supervisord ${RPM_BUILD_ROOT}/rpmbuild/SOURCES/."
 cp ${NAME}.supervisord ${RPM_BUILD_ROOT}/rpmbuild/SOURCES/.
 
-if [ 0 = $SIGN ]; then
+if [ -z ${NOSIGN} ]; then
+    echo "rpmbuild -ba 
+        --define \"_ver ${RELEASE}\"
+        --define \"_releaseno ${BUILD_NUMBER}\"
+        ${NAME}.spec"
     yes "" | rpmbuild -ba \
         --define "_ver ${RELEASE}" \
         --define "_releaseno ${BUILD_NUMBER}" \
         ${NAME}.spec
 else
+    echo "rpmbuild -ba --sign 
+        --define \"_signature gpg\" 
+        --define \"_gpg_name Comcast Xmidt Team <CHQSV-Xmidt-Gpg@comcast.com>\" 
+        --define \"_ver ${RELEASE}\"
+        --define \"_releaseno ${BUILD_NUMBER}\"
+        ${NAME}.spec"
     yes "" | rpmbuild -ba --sign \
         --define "_signature gpg" \
         --define "_gpg_name Comcast Xmidt Team <CHQSV-Xmidt-Gpg@comcast.com>" \
