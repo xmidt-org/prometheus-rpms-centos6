@@ -12,7 +12,7 @@ before_install:
     - docker run -it -e BUILD_NUMBER=$TRAVIS_BUILD_NUMBER -d --name build schmidtw/xmidt.builder.centos6 bash
     - env
     - docker exec build git clone https://github.com/Comcast/prometheus-rpms-centos.git
-    - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then openssl aes-256-cbc -K $encrypted_9f4e195b976a_key -iv $encrypted_9f4e195b976a_iv -in keys/RPM-GPG-KEY-comcast-xmidt.private.enc -out keys/RPM-GPG-KEY-comcast-xmidt.private -d; fi'
+    - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then openssl aes-256-cbc -K $encrypted_703128d636df_key -iv $encrypted_703128d636df_iv -in keys/RPM-GPG-KEY-comcast-xmidt.private.enc -out keys/RPM-GPG-KEY-comcast-xmidt.private -d; fi'
     - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker cp keys/RPM-GPG-KEY-comcast-xmidt.private build:/RPM-GPG-KEY-comcast-xmidt.private; fi'
     - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker exec build bash -c "gpg --allow-secret-key-import --import /RPM-GPG-KEY-comcast-xmidt.private"; fi'
 
@@ -21,9 +21,7 @@ script:
 
 after_success:
     - docker cp build:/root/rpmbuild/RPMS/x86_64 .
-    - docker cp build:/versionno.txt .
     - BINARY_NAME=`ls x86_64/`
-    - TRAVIS_TAG=`cat versionno.txt`
 
 deploy:
   provider: releases
