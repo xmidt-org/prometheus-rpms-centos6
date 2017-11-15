@@ -14,7 +14,7 @@ Documentation
 -------------
 
 If you contribute anything that changes the behavior of the
-application, document it in the [README](https://github.com/Comcast/parodus-client/blob/master/README.md) or [wiki](https://github.com/Comcast/parodus-client/wiki)! This includes new features, additional variants of behavior and breaking changes.
+application, document it in the [README](https://github.com/Comcast/prometheus-rpms-centos6/blob/master/README.md) or [wiki](https://github.com/Comcast/prometheus-rpms-centos6/wiki)! This includes new features, additional variants of behavior and breaking changes.
 
 Testing
 -------
