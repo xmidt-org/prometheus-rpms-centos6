@@ -22,7 +22,9 @@ start() {
 
 stop() {
 	echo -n $"Stopping node_exporter: "
-	killproc supervisord
+    kill $(cat /var/run/node_exporter.pid)
+	RETVAL=$?
+    rm -f /var/run/node_exporter.pid
 	echo
 	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/node_exporter
 }
