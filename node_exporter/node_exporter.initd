@@ -46,7 +46,7 @@ case "$1" in
 	[ -f /var/lock/subsys/node_exporter ] && restart
 	;;
   status)
-	status supervisord
+	status node_exporter
 	RETVAL=$?
 	;;
   *)
