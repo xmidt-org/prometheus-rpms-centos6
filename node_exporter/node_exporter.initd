@@ -22,9 +22,8 @@ start() {
 
 stop() {
 	echo -n $"Stopping node_exporter: "
-    kill $(cat /var/run/node_exporter.pid)
+    supervisorctl -c/etc/node_exporter/supervisord.conf shutdown > /dev/null
 	RETVAL=$?
-    rm -f /var/run/node_exporter.pid
 	echo
 	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/node_exporter
 }
@@ -48,6 +47,7 @@ case "$1" in
 	[ -f /var/lock/subsys/node_exporter ] && restart
 	;;
   status)
+    supervisorctl -c/etc/node_exporter/supervisord.conf status
 	status node_exporter
 	RETVAL=$?
 	;;
