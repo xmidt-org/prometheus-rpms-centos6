@@ -9,14 +9,14 @@ The packaging of Prometheus.io related packages for centos 6.
 
 ## Centos 6
 
-1. Import the public GPG key (replace `0.0.1-65` with the release you want)
+1. Import the public GPG key (replace `Release-7` with the release you want)
 
 ```
-rpm --import https://github.com/Comcast/prometheus-rpms-centos6/releases/download/0.0.1-65/RPM-GPG-KEY-comcast-xmidt
+rpm --import https://github.com/xmidt-org/prometheus-rpms-centos6/releases/download/Release-7/RPM-GPG-KEY-comcast-xmidt
 ```
 
 2. Install the rpm with yum (so it installs any/all dependencies for you)
 
 ```
-yum install https://github.com/Comcast/prometheus-rpms-centos6/releases/download/0.0.1-65/prometheus-rpms-centos6-0.0.1-65.el6.x86_64.rpm
+yum install https://github.com/xmidt-org/prometheus-rpms-centos6/releases/download/Release-7/node_exporter-0.15.1-7.el6.x86_64.rpm
 ```
