@@ -1,3 +1,6 @@
+Centos 6 is no longer supported.  This repo is being archived.
+
+
 # prometheus-rpms-centos6
 
 [![Build Status](https://travis-ci.org/Comcast/prometheus-rpms-centos6.svg?branch=master)](https://travis-ci.org/Comcast/prometheus-rpms-centos6) 
